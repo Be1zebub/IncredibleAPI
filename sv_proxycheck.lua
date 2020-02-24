@@ -5,6 +5,8 @@
         EMail: beelzebub@incredible-gmod.ru
         Discord: discord.incredible-gmod.ru
 --——————————————————————————————————————————————]]--
+Incredible_API = Incredible_API or {}
+Incredible_API.Cache = Incredible_API.Cache or {}
 
 Incredible_API.Cache.Proxy = Incredible_API.Cache.Proxy or {}
 
