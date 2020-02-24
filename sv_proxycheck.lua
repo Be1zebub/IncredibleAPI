@@ -24,7 +24,7 @@ Incredible_API.ProxyByIP = function(ip, callback)
 	http_Fetch("https://blackbox.ipinfo.app/lookup/"..ip, function(body)
 		if not body or body == "" then return end
 
-		Incredible_API.Cache.Proxy[ip] = body == "Y"--(body == "Y" and true or body == "N" and false)
+		Incredible_API.Cache.Proxy[ip] = body == "Y" --(body == "Y" and true or body == "N" and false)
 
 		if callback then
 			callback(Incredible_API.Cache.Proxy[ip])
@@ -37,3 +37,16 @@ Incredible_API.Proxy = function(ply, callback)
 
 	Incredible_API.ProxyByIP(ply:IPAddress(), callback)
 end
+
+
+--[[
+	Usage:
+
+	hook.Add("PlayerAuthed", "AntiProxy", function(ply)
+		Incredible_API.Proxy(ply, function(isproxy)
+			if isproxy then
+				ply:Kick("Я ТЕБЯ ЗАПРЕЩАЮ!")
+			end
+		end)
+	end)
+]]--
