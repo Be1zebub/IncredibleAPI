@@ -1,5 +1,5 @@
 --[[——————————————————————————————————————————————--
-             Developer: [INC]Be1zebub
+             Developer: Beelzebub
 
          Website: incredible-gmod.ru/owner
         EMail: beelzebub@incredible-gmod.ru
