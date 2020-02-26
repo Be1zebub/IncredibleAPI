@@ -20,9 +20,9 @@ local Is_Valid = IsValid
 IncredibleAPI.GeoIPByIP = function(ip, callback)
 	if not ip then return end
 
-	if IncredibleAPI.Cache.GeoIPip] then
+	if IncredibleAPI.Cache.GeoIP[ip] then
 		if callback then
-			callback(IncredibleAPI.Cache.GeoIPip])
+			callback(IncredibleAPI.Cache.GeoIP[ip])
 		end
 		return
 	end
@@ -32,7 +32,7 @@ IncredibleAPI.GeoIPByIP = function(ip, callback)
 		local tbl = util_JSONToTable(body)
 		if not tbl or not tbl["country_code"] then return end
 
-		IncredibleAPI.Cache.GeoIPip] = tbl["country_code"]
+		IncredibleAPI.Cache.GeoIP[ip] = tbl["country_code"]
 	end)
 end
 
