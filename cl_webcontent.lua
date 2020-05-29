@@ -1,6 +1,5 @@
 --[[——————————————————————————————————————————————--
              Developer: [INC]Be1zebub
-
          Website: incredible-gmod.ru/owner
         EMail: beelzebub@incredible-gmod.ru
         Discord: discord.incredible-gmod.ru
@@ -16,9 +15,8 @@ local http_Fetch, LocalPly, Mat, string_Replace = http.Fetch, LocalPlayer, Mater
 local file_Write, file_Exists, CurrentTime = file.Write, file.Exists, CurTime
 
 
-local ShowDownloadIcon = function(b)
-    if b then return end
-    return IncredibleAPI.WebMaterial("https://incredible-gmod.ru/assets/icons/download.png", b)
+local ShowDownloadIcon = function()
+    return IncredibleAPI.WebMaterial("https://incredible-gmod.ru/assets/icons/download.png")
 end
 
 IncredibleAPI.Util.GetFilenameFromURL = function(url, ext)
@@ -27,7 +25,7 @@ IncredibleAPI.Util.GetFilenameFromURL = function(url, ext)
     return string_Replace(filename, "." .. filename:match("[^.]+$"), "") -- Remove extention
 end
 
-IncredibleAPI.WebMaterial = function(img_url, b)
+IncredibleAPI.WebMaterial = function(img_url)
     local img_name = IncredibleAPI.Util.GetFilenameFromURL(img_url)
     local path = "incredible_materials/" .. img_name .. ".png"
     if IncredibleAPI.Cache.WebMaterials[img_name] then return IncredibleAPI.Cache.WebMaterials[img_name] end
@@ -37,7 +35,7 @@ IncredibleAPI.WebMaterial = function(img_url, b)
 
         return IncredibleAPI.Cache.WebMaterials[img_name]
     else
-        if (LocalPly().FetchDelay or 0) > CurrentTime() then return ShowDownloadIcon(b) end
+        if (LocalPly().FetchDelay or 0) > CurrentTime() then return ShowDownloadIcon() end
         LocalPly().FetchDelay = CurrentTime() + 2
 
         http_Fetch(img_url, function(result)
@@ -51,7 +49,7 @@ IncredibleAPI.WebMaterial = function(img_url, b)
         end)
     end
 
-    return ShowDownloadIcon(b)
+    return ShowDownloadIcon()
 end
 
-ShowDownloadIcon(true) -- Force Download that shiet
+ShowDownloadIcon() -- Force Download that shiet
