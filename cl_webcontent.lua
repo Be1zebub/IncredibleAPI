@@ -15,8 +15,9 @@ local http_Fetch, LocalPly, Mat, string_Replace = http.Fetch, LocalPlayer, Mater
 local file_Write, file_Exists, CurrentTime = file.Write, file.Exists, CurTime
 
 
-local ShowDownloadIcon = function()
-    return IncredibleAPI.WebMaterial("https://incredible-gmod.ru/assets/icons/download.png")
+local ShowDownloadIcon = function(b)
+    if b then return end
+    return IncredibleAPI.WebMaterial("https://incredible-gmod.ru/assets/icons/download.png", true)
 end
 
 IncredibleAPI.Util.GetFilenameFromURL = function(url, ext)
@@ -25,7 +26,7 @@ IncredibleAPI.Util.GetFilenameFromURL = function(url, ext)
     return string_Replace(filename, "." .. filename:match("[^.]+$"), "") -- Remove extention
 end
 
-IncredibleAPI.WebMaterial = function(img_url)
+IncredibleAPI.WebMaterial = function(img_url, b)
     local img_name = IncredibleAPI.Util.GetFilenameFromURL(img_url)
     local path = "incredible_materials/" .. img_name .. ".png"
     if IncredibleAPI.Cache.WebMaterials[img_name] then return IncredibleAPI.Cache.WebMaterials[img_name] end
@@ -35,7 +36,7 @@ IncredibleAPI.WebMaterial = function(img_url)
 
         return IncredibleAPI.Cache.WebMaterials[img_name]
     else
-        if (LocalPly().FetchDelay or 0) > CurrentTime() then return ShowDownloadIcon() end
+        if (LocalPly().FetchDelay or 0) > CurrentTime() then return ShowDownloadIcon(b) end
         LocalPly().FetchDelay = CurrentTime() + 2
 
         http_Fetch(img_url, function(result)
@@ -49,7 +50,7 @@ IncredibleAPI.WebMaterial = function(img_url)
         end)
     end
 
-    return ShowDownloadIcon()
+    return ShowDownloadIcon(b)
 end
 
 ShowDownloadIcon() -- Force Download that shiet
