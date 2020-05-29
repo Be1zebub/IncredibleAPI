@@ -47,7 +47,7 @@ end
   
    hook.Add("PlayerAuthed", "API_GeoIP_Test", function(ply)
     IncredibleAPI.GeoIP(ply, function(country_code)
-      print(ply:Nick(), "ip has:", country_code, "country code")
+      print(ply:Nick(), " ip has: ", country_code, "country code")
     end
    end)
 ]]--
