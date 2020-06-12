@@ -4,13 +4,13 @@ IncredibleAPI:Call("SteamPlaytime", player.GetHumans()[1]:SteamID64(), "YorSteam
 	print(seconds/60)
 end)
 
-IncredibleAPI:Call("WebMaterials", "https://incredible-gmod.ru/assets/branding/discord_avatar.png", function(webMat) -- Get web material
+IncredibleAPI:Call("WebMaterials", "http://incredible-gmod.ru/assets/other/beelze_pixel.png", function(webMat) -- Get web material
   print(webMat)
   if CLIENT then
     hook.Add("HUDPaint", "DrawWebMatExample", function()
         surface.SetDrawColor(255, 255, 255, 255)
         surface.SetMaterial(webMat)
-        surface.DrawTexturedRect(ScrW()*0.5 - 256, ScrH()*0.5 - 256, 512, 512)
+        surface.DrawTexturedRect(ScrW()*0.5 - 128, ScrH()*0.5 - 120.5, 256, 241)
     end)
   end
 end)
