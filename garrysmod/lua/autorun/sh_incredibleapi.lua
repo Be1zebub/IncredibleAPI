@@ -98,8 +98,7 @@ local include_realm = { -- Thx Penguin for thats better solution :)
 }
 
 include_realm.sh = function(f)
-    include_realm.sv(f)
-    include_realm.cl(f)
+    return include_realm.sv(f) or include_realm.cl(f)
 end
 
 local __a, __b = file.Find, string.sub
@@ -117,16 +116,20 @@ end
 
 local file_register = function(f)
 	local realm = __b(f, 1, 2)
-
-    if __DebugMode then
-        print(realm .. " | " .. f)
-    end
     
     if include_realm[realm] then
     	local result = include_realm[realm]("incredible_api/"..f)
     	if result then
     		IncredibleAPI:RegisterModule(result.Name or Filename2CoolName(f), result)
+
+    		if __DebugMode then
+		        print("Registered: " .. realm .. " | " .. f)
+		    end
+		elseif __DebugMode then
+			print("[ERROR] Include did not return table: " .. realm .. " | " .. f)
     	end
+    elseif __DebugMode then
+	    print("[ERROR] Realm does not exists: " .. realm .. " | " .. f)
     end
 end
 
