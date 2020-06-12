@@ -33,3 +33,8 @@ IncredibleAPI:Call("SteamBans", ply, "!!! Your SteamAPI-Key Here !!!", function(
 	PrintTable(bans_data)
 end)
 
+IncredibleAPI:Call("SteamFamilyShared", ply, "!!! Your SteamAPI-Key Here !!!", function(is_family_shared) -- Anti-FamilyShared
+	if is_family_shared then
+		ply:Kick("Family-Shared is not allowed!")
+	end
+end)
