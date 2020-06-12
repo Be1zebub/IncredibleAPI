@@ -1,2 +1,3 @@
-# Incredible-API-things
-lua скрипты для работы с множеством полезных API
+# IncredibleAPI
+
+Удобная библиотека для работы с различными Web API
