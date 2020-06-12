@@ -1,4 +1,4 @@
-Usage examples:
+-- Usage examples:
 
 IncredibleAPI:Call("SteamPlaytime", player.GetHumans()[1]:SteamID64(), "YorSteamAPIKeyHere", function(seconds) -- Get gmod playtime
 	print(seconds/60)
