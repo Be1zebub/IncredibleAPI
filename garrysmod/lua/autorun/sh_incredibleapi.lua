@@ -98,7 +98,7 @@ local include_realm = { -- Thx Penguin for thats better solution :)
 }
 
 include_realm.sh = function(f)
-    return include_realm.sv(f) or include_realm.cl(f)
+    return include_realm.cl(f) or include_realm.sv(f)
 end
 
 local __a, __b = file.Find, string.sub
