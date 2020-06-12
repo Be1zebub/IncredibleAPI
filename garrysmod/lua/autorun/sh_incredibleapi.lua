@@ -26,7 +26,6 @@ end
 
 local ApiMETA = {}
 ApiMETA.__index = ApiMETA
-ApiMETA.Cache = {}
 ApiMETA.W8 = 0
 ApiMETA.DefaultDelay = 5
 ApiMETA.UrlPattern = "https?://[%w-_%.%?%.:/%+=&]+"
@@ -80,6 +79,7 @@ end
 --——————————————— M O D U LE —▬— R E G I S T R A T I O N ———————————————--
 
 function IncredibleAPI:RegisterModule(name, tab)
+	tab.Cache = {}
 	setmetatable(tab, ApiMETA)
 	IncredibleAPI.Modules[name] = tab
 
