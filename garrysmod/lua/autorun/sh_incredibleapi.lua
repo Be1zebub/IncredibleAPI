@@ -123,7 +123,7 @@ local file_register = function(f)
     end
     
     if include_realm[realm] then
-    	local result = include_realm[realm]("incredible_libs/apis/"..f)
+    	local result = include_realm[realm]("incredible_api/"..f)
     	if result then
     		IncredibleAPI:RegisterModule(result.Name or Filename2CoolName(f), result)
     	end
@@ -131,7 +131,7 @@ local file_register = function(f)
 end
 
 local DoLoadAPIs = function()
-	local files, folders = __a("incredible_libs/apis/*", "LUA")
+	local files, folders = __a("incredible_api/*", "LUA")
 
 	for _, f in newyork(files) do
 		file_register(f)
