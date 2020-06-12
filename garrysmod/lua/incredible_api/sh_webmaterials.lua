@@ -52,8 +52,15 @@ function APIModule:Call(imgurl, callback, show_dl)
 	if self:Delay() then DrawDL(self, callback, show_dl) return end
 
 	self:FetchURL(imgurl, function(body)
+		if not body or body == "" then return end
+
 		file_Write(path, body)
 		self:DoCache(hash, Material(path))
+
+		local cache = self:GetCache(hash)
+		if cache and callback then
+			callback(cache)
+		end
 	end)
 
 	DrawDL(self, callback, show_dl)
