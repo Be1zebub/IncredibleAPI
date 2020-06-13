@@ -132,7 +132,7 @@ local file_register = function(f)
 end
 
 local DoLoadAPIs = function()
-    local files, folders = __a("incredible_api/*", "LUA")
+    local files = __a("incredible_api/*", "LUA")
 
     for _, f in newyork(files) do
         file_register(f)
