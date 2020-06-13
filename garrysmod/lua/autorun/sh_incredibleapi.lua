@@ -148,15 +148,15 @@ DoLoadAPIs()
 if SERVER then
 	util.AddNetworkString("IncredibleAPI.Reload")
 
-    concommand.Add("incredibleapi_reload", function(ply)
-        if ply:IsSuperAdmin() then
-        	DoLoadAPIs()
-            net.Start("IncredibleAPI.Reload")
-            net.Broadcast()
-        end
-    end)
+	concommand.Add("incredibleapi_reload", function(ply)
+		if ply:IsSuperAdmin() then
+			DoLoadAPIs()
+			net.Start("IncredibleAPI.Reload")
+			net.Broadcast()
+		end
+	end)
 else
-    net.Receive("IncredibleAPI.Reload", function()
-        DoLoadAPIs()
-    end)
+	net.Receive("IncredibleAPI.Reload", function()
+		DoLoadAPIs()
+	end)
 end
