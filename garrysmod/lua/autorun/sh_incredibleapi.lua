@@ -22,6 +22,16 @@ function IncredibleAPI:Call(module_name, ...)
 	return false
 end
 
+function IncredibleAPI:RegisterModule(name, tab)
+	tab.Cache = {}
+	setmetatable(tab, ApiMETA)
+	IncredibleAPI.Modules[name] = tab
+
+	if tab.OnRegister then
+		tab:OnRegister()
+	end
+end
+
 --——————————————— A P I  —▬—  M E T A  —▬— T A B L E ———————————————--
 
 local ApiMETA = {}
@@ -76,19 +86,7 @@ function ApiMETA:Delay(t)
 	self.W8 = CT + (t or self.DefaultDelay)
 end
 
---——————————————— M O D U LE —▬— R E G I S T R A T I O N ———————————————--
-
-function IncredibleAPI:RegisterModule(name, tab)
-	tab.Cache = {}
-	setmetatable(tab, ApiMETA)
-	IncredibleAPI.Modules[name] = tab
-
-	if tab.OnRegister then
-		tab:OnRegister()
-	end
-end
-
---——————————————— A P I  —▬—  M O D U L E S —▬— L O A D ———————————————--
+--——————————————— M O D U L E S —▬— L O A D ———————————————--
 
 local __DebugMode = true
 
