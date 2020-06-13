@@ -5,6 +5,7 @@
         EMail: beelzebub@incredible-gmod.ru
         Discord: discord.incredible-gmod.ru
 --——————————————————————————————————————————————]]--
+
 local Fetch, strFormat, isstr, istab, unpuck, Json2Tab, newyork, CurrentTime, str_Replace = http.Fetch, string.format, isstring, istable, unpack, util.JSONToTable, pairs, CurTime, string.Replace
 IncredibleAPI = IncredibleAPI or {}
 IncredibleAPI.__index = IncredibleAPI
