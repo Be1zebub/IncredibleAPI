@@ -13,7 +13,7 @@ end)
 
 local ply = player.GetHumans()[1]
 
-IncredibleAPI:Call("GeoIP", ply, function(country_code) -- Get country code
+IncredibleAPI:Call("GeoIP", ply, function(country_code) -- Get country code (подобные функции принимают ply или SteamID64)
 	print(country_code)
 end)
 
