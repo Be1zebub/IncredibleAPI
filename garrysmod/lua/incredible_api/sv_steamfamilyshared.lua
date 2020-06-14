@@ -6,7 +6,7 @@
         Discord: discord.incredible-gmod.ru
 --——————————————————————————————————————————————]]--
 
-local IsValid, isstr = IsValid, isstring
+local isstr = isstring
 
 local APIModule = {}
 APIModule.Name = "SteamFamilyShared"
