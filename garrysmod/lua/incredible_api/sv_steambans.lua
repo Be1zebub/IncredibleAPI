@@ -6,7 +6,7 @@
         Discord: discord.incredible-gmod.ru
 --——————————————————————————————————————————————]]--
 
-local Fetch, JSONToTable, IsValid, tonum, isstr = http.Fetch, util.JSONToTable, IsValid, tonumber, isstring
+local IsValid, isstr = IsValid, isstring
 
 local APIModule = {}
 APIModule.Name = "SteamBans"
@@ -26,15 +26,14 @@ function APIModule:Call(target, steamapi_key, callback)
 
 	self:FetchURL(self.ApiURL:format(steamapi_key, target), function(body)
 		if not body or body == "" then return end
-		local tbl = JSONToTable(body)
-		if not tbl or not tbl.players then return end
+		local tbl = self:HandleJson(body, "players", 1)
+		if not tbl then return end
 
-		tbl = tbl.players[1]
 		tbl["SteamId"] = nil
-
 		if tbl["EconomyBan"] == "none" then
 			tbl["EconomyBan"] = false
 		end
+
 		self:DoCache(target, tbl)
 		if callback then
 			callback(tbl)
