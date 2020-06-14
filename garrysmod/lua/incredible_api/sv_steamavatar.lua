@@ -6,7 +6,7 @@
         Discord: discord.incredible-gmod.ru
 --——————————————————————————————————————————————]]--
 
-local Fetch, JSONToTable, IsValid, tonum, isstr = http.Fetch, util.JSONToTable, IsValid, tonumber, isstring
+local IsValid, isstr = IsValid, isstring
 
 local APIModule = {}
 APIModule.Name = "SteamAvatar"
@@ -33,14 +33,13 @@ function APIModule:Call(target, steamapi_key, callback, show_default)
 			return
 		end
 
-		local tbl = JSONToTable(body)
-		if not tbl or not tbl.response or not tbl.response.players or not tbl.response.players[1] or not tbl.response.players[1].avatarfull then
+		local result = self:HandleJson(body, "response", "players", 1, "avatarfull")
+		if not result then
 			if callback and show_default then
 				callback(self.DefaultAvatar)
 			end
 			return
 		end
-		local result = tbl.response.players[1].avatarfull
 
 		self:DoCache(target, result)
 		if callback then
