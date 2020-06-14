@@ -12,10 +12,7 @@ local APIModule = {}
 APIModule.Name = "SteamFamilyShared"
 APIModule.ApiURL = "https://api.steampowered.com/IPlayerService/IsPlayingSharedGame/v1/?key=%s&steamid=%s"
 function APIModule:Call(target, steamapi_key, callback)
-	if not isstr(target) and IsValid(target) and target:IsPlayer() then
-		target = target:SteamID64()
-	end
-
+	target = self:RequestSteamID64(target)
 	if not isstr(target) then return end
 
 	local cache = self:GetCache(target)
