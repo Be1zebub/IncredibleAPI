@@ -43,3 +43,9 @@ end)
 IncredibleAPI:Call("SteamIsInGroup", ply, steam_api_key, "4822177", function(bool) -- Check if user member of group
 	print(bool)
 end)
+
+IncredibleAPI:Call("SteamGetCollectionItems", steam_api_key, "1829820706", function(ids) -- Auto resource.AddWorkshop 4all collection items
+	for k, workshopid in pairs(ids) do
+		resource.AddWorkshop(workshopid)
+	end
+end)
