@@ -6,15 +6,13 @@
         Discord: discord.incredible-gmod.ru
 --——————————————————————————————————————————————]]--
 
-local Fetch, IsValid, isstr = http.Fetch, IsValid, isstring
+local  isstr = isstring
 
 local APIModule = {}
 APIModule.Name = "Proxy"
 APIModule.ApiURL = "https://blackbox.ipinfo.app/lookup/%s"
 function APIModule:Call(target, callback)
-	if not isstr(target) and IsValid(target) and target:IsPlayer() then
-		target = target:IPAddress()
-	end
+	target = self:RequestSteamID64(target)
 	if not isstr(target) then return end
 
 	local cache = self:GetCache(target)
