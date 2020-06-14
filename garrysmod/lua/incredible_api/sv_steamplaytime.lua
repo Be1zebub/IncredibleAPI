@@ -6,17 +6,16 @@
         Discord: discord.incredible-gmod.ru
 --——————————————————————————————————————————————]]--
 
-local Fetch, JSONToTable, IsValid, tonum, isstr, pairs = http.Fetch, util.JSONToTable, IsValid, tonumber, isstring, pairs
+local isstr, pairs = isstring, pairs
 
 local APIModule = {}
 APIModule.Name = "SteamPlaytime"
 APIModule.ApiURL = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key=%s&steamid=%s"
-function APIModule:Call(target, steamapi_key, callback)
-	if not isstr(target) and IsValid(target) and target:IsPlayer() then
-		target = target:SteamID64()
-	end
-
+function APIModule:Call(target, steamapi_key, callback, appid)
+	target = self:RequestSteamID64(target)
 	if not isstr(target) then return end
+
+	appid = appid or 4000
 
 	local cache = self:GetCache(target)
 	if cache and callback then
@@ -26,11 +25,11 @@ function APIModule:Call(target, steamapi_key, callback)
 
 	self:FetchURL(self.ApiURL:format(steamapi_key, target), function(body)
 		if not body or body == "" then return end
-		local games = JSONToTable(body)
-		if not games or not games["response"] or not games["response"]["games"] then return end
+		local result = self:HandleJson(body, "response", "games")
+		if not result then return end
 
-		for k,v in pairs(games["response"]["games"]) do
-			if v["appid"] == 4000 then
+		for k,v in pairs(result) do
+			if v["appid"] == appid then
 				local result = v["playtime_forever"]
 
 				self:DoCache(target, result)
