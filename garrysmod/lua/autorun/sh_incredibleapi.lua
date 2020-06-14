@@ -7,9 +7,15 @@
 --——————————————————————————————————————————————]]
 --
 local Fetch, strFormat, isstr, istab, unpuck, Json2Tab, newyork, CurrentTime, str_Replace, IsValid = http.Fetch, string.format, isstring, istable, unpack, util.JSONToTable, pairs, CurTime, string.Replace, IsValid
+local TableToJSON, istable, fWrite, tostring, fRead = util.TableToJSON, istable, file.Write, tostring, file.Read
+
 IncredibleAPI = IncredibleAPI or {}
 IncredibleAPI.__index = IncredibleAPI
 IncredibleAPI.Modules = IncredibleAPI.Modules or {}
+
+if not file.Exists("incredible_api", "DATA") then
+	file.CreateDir("incredible_api")
+end
 
 function IncredibleAPI:Call(module_name, ...)
     local m = self.Modules[module_name]
@@ -74,12 +80,35 @@ function ApiMETA:HandleJson(json, ...)
     return tbl
 end
 
-function ApiMETA:DoCache(uid, data)
+function ApiMETA:DoCache(uid, data, Filewrite)
     self.Cache[uid] = data
+
+    if write then
+    	if istable(data) then
+    		data = TableToJSON(data)
+    	end
+
+    	fWrite("incredible_api/"..uid..".txt", tostring(data))
+    end
 end
 
-function ApiMETA:GetCache(uid)
-    return self.Cache[uid]
+function ApiMETA:GetCache(uid, Fileread)
+	if read then
+		if self.Cache[uid] then return self.Cache[uid] end
+
+		local data = fRead("incredible_api/"..uid..".txt")
+		if data == "" or data == "no value" then return end
+
+		local tab = Json2Tab(data)
+		if istable(tab) then
+			data = tab
+		end
+
+		self.Cache[uid] = data
+		return data
+	else
+		return self.Cache[uid]
+	end
 end
 
 function ApiMETA:Delay(t)
