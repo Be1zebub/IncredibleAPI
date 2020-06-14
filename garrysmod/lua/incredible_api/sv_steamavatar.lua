@@ -6,17 +6,14 @@
         Discord: discord.incredible-gmod.ru
 --——————————————————————————————————————————————]]--
 
-local IsValid, isstr = IsValid, isstring
+local isstr = isstring
 
 local APIModule = {}
 APIModule.Name = "SteamAvatar"
 APIModule.ApiURL = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=%s&steamids=%s"
 APIModule.DefaultAvatar = "https://incredible-gmod.ru/assets/branding/discord_avatar.png"
 function APIModule:Call(target, steamapi_key, callback, show_default)
-	if not isstr(target) and IsValid(target) and target:IsPlayer() then
-		target = target:SteamID64()
-	end
-
+	target = self:RequestSteamID64(target)
 	if not isstr(target) then return end
 
 	local cache = self:GetCache(target)
