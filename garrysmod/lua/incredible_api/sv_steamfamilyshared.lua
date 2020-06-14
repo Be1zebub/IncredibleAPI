@@ -6,7 +6,7 @@
         Discord: discord.incredible-gmod.ru
 --——————————————————————————————————————————————]]--
 
-local Fetch, JSONToTable, IsValid, tonum, isstr = http.Fetch, util.JSONToTable, IsValid, tonumber, isstring
+local IsValid, isstr = IsValid, isstring
 
 local APIModule = {}
 APIModule.Name = "SteamFamilyShared"
@@ -26,9 +26,10 @@ function APIModule:Call(target, steamapi_key, callback)
 
 	self:FetchURL(self.ApiURL:format(steamapi_key, target), function(body)
 		if not body or body == "" then return end
-		local tab = JSONToTable(body)
-		if not tab or not tab["response"] or not tab["response"]["lender_steamid"] then return end
-		local result = tab["response"]["lender_steamid"] == 1
+		local result = self:HandleJson(body, "response", "lender_steamid")
+		if not result then return end
+
+		result = result == 1
 
 		self:DoCache(target, result)
 		if callback then
