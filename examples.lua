@@ -1,4 +1,5 @@
--- Usage examples:
+-- incredible-gmod.ru
+-- IncredibleAPI lib — Usage examples:
 
 IncredibleAPI:Call("WebMaterials", "http://incredible-gmod.ru/assets/other/beelze_pixel.png", function(webMat) -- Get web material
 	print(webMat)
