@@ -1,11 +1,6 @@
---[[——————————————————————————————————————————————--
-               Developer: Be1zebub
+-- incredible-gmod.ru
+-- IncredibleAPI lib
 
-             Website: incredible-gmod.ru
-        EMail: beelzebub@incredible-gmod.ru
-        Discord: discord.incredible-gmod.ru
---——————————————————————————————————————————————]]
---
 local Fetch, strFormat, isstr, istab, unpuck, Json2Tab, newyork, CurrentTime, str_Replace, IsValid = http.Fetch, string.format, isstring, istable, unpack, util.JSONToTable, pairs, CurTime, string.Replace, IsValid
 local TableToJSON, istable, fWrite, tostring, fRead = util.TableToJSON, istable, file.Write, tostring, file.Read
 
