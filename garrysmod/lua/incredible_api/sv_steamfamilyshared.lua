@@ -1,10 +1,5 @@
---[[——————————————————————————————————————————————--
-             Developer: [INC]Be1zebub
-
-         Website: incredible-gmod.ru/owner
-        EMail: beelzebub@incredible-gmod.ru
-        Discord: discord.incredible-gmod.ru
---——————————————————————————————————————————————]]--
+-- incredible-gmod.ru
+-- IncredibleAPI lib
 
 local isstr = isstring
 
