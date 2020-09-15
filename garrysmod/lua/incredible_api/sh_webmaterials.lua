@@ -61,7 +61,10 @@ function APIModule:Call(imgurl, callback, show_dl)
 	DrawDL(self, callback, show_dl)
 end
 function APIModule:OnRegister()
-	self:Call("https://incredible-gmod.ru/assets/icons/download.png") -- precache
+	hook.Add("HUDPaint", "incredible-gmod.ru/apilib/webmaterials/precache", function()
+		hook.Remove("HUDPaint", "incredible-gmod.ru/apilib/webmaterials/precache")
+		self:Call("https://incredible-gmod.ru/assets/icons/download.png") -- precache
+	end)
 end
 
 return APIModule
