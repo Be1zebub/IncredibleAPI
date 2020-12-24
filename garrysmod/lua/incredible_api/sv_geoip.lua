@@ -12,8 +12,7 @@ function APIModule:Call(target, callback)
 
 	local cache = self:GetCache(target)
 	if cache and callback then
-		callback(cache)
-		return
+		return callback(cache)
 	end
 
 	self:FetchURL(self.ApiURL:format(target), function(body)
