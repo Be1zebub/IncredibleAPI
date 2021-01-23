@@ -17,7 +17,7 @@ function APIModule:Call(target, steamapi_key, callback, show_default)
 		return
 	end
 
-	self:FetchURL(self.ApiURL:format(steamapi_key, target), function(body)
+	self:FetchURL(self:FormatUrl(steamapi_key, target), function(body)
 		if not body or body == "" then
 			if callback and show_default then
 				callback(self.DefaultAvatar)
