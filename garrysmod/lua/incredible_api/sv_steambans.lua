@@ -2,6 +2,7 @@
 -- IncredibleAPI lib
 
 local isstr = isstring
+local none = {["none"] = true}
 
 local APIModule = {}
 APIModule.Name = "SteamBans"
@@ -21,9 +22,9 @@ function APIModule:Call(target, steamapi_key, callback)
 		local tbl = self:HandleJson(body, "players", 1)
 		if not tbl then return end
 
-		tbl["SteamId"] = nil
-		if tbl["EconomyBan"] == "none" then
-			tbl["EconomyBan"] = false
+		tbl.SteamId = nil
+		if none[tbl.EconomyBan] then
+			tbl.EconomyBan = false
 		end
 
 		self:DoCache(target, tbl)
