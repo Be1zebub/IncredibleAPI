@@ -16,7 +16,7 @@ function APIModule:Call(target, callback)
 		return
 	end
 
-	self:FetchURL(self.ApiURL:format(target), function(body)
+	self:FetchURL(self:FormatUrl(target), function(body)
 		if not body or body == "" then return end
 		local result = body == "Y"
 
