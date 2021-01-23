@@ -15,7 +15,7 @@ function APIModule:Call(target, callback)
 		return callback(cache)
 	end
 
-	self:FetchURL(self.ApiURL:format(target), function(body)
+	self:FetchURL(self:FormatUrl(target), function(body)
 		if not body or body == "" then return end
 		local result = self:HandleJson(body, "country_code")
 		if not result then return end
