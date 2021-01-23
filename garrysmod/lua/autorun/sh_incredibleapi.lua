@@ -35,6 +35,10 @@ function ApiMETA:IsValidURL(url)
     return url:find(self.UrlPattern)
 end
 
+function ApiMETA:FormatUrl(...)
+    return strFormat((self.ApiURL or self.URL), ...)
+end
+
 function ApiMETA:FetchURL(args, handle)
     local url = self.URL and strFormat(self.URL, isstr(args) and args or istab(args) and unpuck(args)) or args
     if not self:IsValidURL(url) then return false end
