@@ -16,7 +16,7 @@ function APIModule:Call(target, steamapi_key, callback)
 		return
 	end
 
-	self:FetchURL(self.ApiURL:format(steamapi_key, target), function(body)
+	self:FetchURL(self:FormatUrl(steamapi_key, target), function(body)
 		if not body or body == "" then return end
 		local tbl = self:HandleJson(body, "players", 1)
 		if not tbl then return end
