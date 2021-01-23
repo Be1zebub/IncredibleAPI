@@ -17,7 +17,7 @@ function APIModule:Call(target, steamapi_key, group_id, callback)
 		return
 	end
 
-	self:FetchURL(self.ApiURL:format(steamapi_key, target), function(body)
+	self:FetchURL(self:FormatUrl(steamapi_key, target), function(body)
 		if not body or body == "" then return end
 		local tbl = self:HandleJson(body, "response", "groups")
 		if not tbl then return end
