@@ -10,7 +10,7 @@ function APIModule:Call(target, steamapi_key, callback, appid)
 	target = self:RequestSteamID64(target)
 	if not isstr(target) then return end
 
-	appid = appid or 4000
+	appid = {[appid or 4000] = true}
 
 	local cache = self:GetCache(target)
 	if cache and callback then
@@ -24,7 +24,7 @@ function APIModule:Call(target, steamapi_key, callback, appid)
 		if not result then return end
 
 		for k,v in pairs(result) do
-			if v["appid"] == appid then
+			if appid[v.appid] then
 				local result = v["playtime_forever"]
 
 				self:DoCache(target, result)
